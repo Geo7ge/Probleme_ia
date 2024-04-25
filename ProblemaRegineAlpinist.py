@@ -1,16 +1,16 @@
 from random import randint
 
-N = 8
+# N = 8
 
 
-def configureRandomly(board, state):
+def configureRandomly(board, state, N):
     for i in range(N):
 
         state[i] = randint(0, 100000) % N
         board[state[i]][i] = 1
 
 
-def printBoard(board):
+def printBoard(board, N):
     for i in range(N):
         print(*board[i])
 
@@ -19,7 +19,7 @@ def printState(state):
     print(*state)
 
 
-def compareStates(state1, state2):
+def compareStates(state1, state2, N):
     for i in range(N):
         if (state1[i] != state2[i]):
             return False
@@ -27,13 +27,13 @@ def compareStates(state1, state2):
     return True
 
 
-def fill(board, value):
+def fill(board, value, N):
     for i in range(N):
         for j in range(N):
             board[i][j] = value
 
 
-def calculateObjective(board, state):
+def calculateObjective(board, state, N):
     attacking = 0
     for i in range(N):
         row = state[i]
@@ -91,30 +91,30 @@ def calculateObjective(board, state):
     return int(attacking / 2)
 
 
-def generateBoard(board, state):
-    fill(board, 0)
+def generateBoard(board, state, N):
+    fill(board, 0, N)
     for i in range(N):
         board[state[i]][i] = 1
 
 
-def copyState(state1, state2):
+def copyState(state1, state2, N):
     for i in range(N):
         state1[i] = state2[i]
 
 
-def getNeighbour(board, state):
+def getNeighbour(board, state, N):
     opBoard = [[0 for _ in range(N)] for _ in range(N)]
     opState = [0 for _ in range(N)]
 
-    copyState(opState, state)
-    generateBoard(opBoard, opState)
+    copyState(opState, state, N)
+    generateBoard(opBoard, opState, N)
 
-    opObjective = calculateObjective(opBoard, opState)
+    opObjective = calculateObjective(opBoard, opState, N)
     NeighbourBoard = [[0 for _ in range(N)] for _ in range(N)]
 
     NeighbourState = [0 for _ in range(N)]
-    copyState(NeighbourState, state)
-    generateBoard(NeighbourBoard, NeighbourState)
+    copyState(NeighbourState, state, N)
+    generateBoard(NeighbourBoard, NeighbourState, N)
     for i in range(N):
         for j in range(N):
 
@@ -123,43 +123,43 @@ def getNeighbour(board, state):
                 NeighbourState[i] = j
                 NeighbourBoard[NeighbourState[i]][i] = 1
                 NeighbourBoard[state[i]][i] = 0
-                temp = calculateObjective(NeighbourBoard, NeighbourState)
+                temp = calculateObjective(NeighbourBoard, NeighbourState, N)
                 if (temp <= opObjective):
                     opObjective = temp
-                    copyState(opState, NeighbourState)
-                    generateBoard(opBoard, opState)
+                    copyState(opState, NeighbourState, N)
+                    generateBoard(opBoard, opState, N)
 
                 NeighbourBoard[NeighbourState[i]][i] = 0
                 NeighbourState[i] = state[i]
                 NeighbourBoard[state[i]][i] = 1
-    copyState(state, opState)
-    fill(board, 0)
-    generateBoard(board, state)
+    copyState(state, opState, N)
+    fill(board, 0, N)
+    generateBoard(board, state, N)
 
 
-def hillClimbing(board, state):
+def hillClimbing(board, state, N):
     neighbourBoard = [[0 for _ in range(N)] for _ in range(N)]
     neighbourState = [0 for _ in range(N)]
 
-    copyState(neighbourState, state)
-    generateBoard(neighbourBoard, neighbourState)
+    copyState(neighbourState, state, N)
+    generateBoard(neighbourBoard, neighbourState, N)
 
     while True:
 
-        copyState(state, neighbourState)
-        generateBoard(board, state)
+        copyState(state, neighbourState, N)
+        generateBoard(board, state, N)
 
-        getNeighbour(neighbourBoard, neighbourState)
+        getNeighbour(neighbourBoard, neighbourState, N)
 
-        if (compareStates(state, neighbourState)):
+        if (compareStates(state, neighbourState, N)):
 
-            printBoard(board)
+            printBoard(board, N)
             break
 
-        elif (calculateObjective(board, state) == calculateObjective(neighbourBoard, neighbourState)):
+        elif (calculateObjective(board, state, N) == calculateObjective(neighbourBoard, neighbourState, N)):
 
             neighbourState[randint(0, 100000) % N] = randint(0, 100000) % N
-            generateBoard(neighbourBoard, neighbourState)
+            generateBoard(neighbourBoard, neighbourState, N)
 
 
 if __name__ == "__main__":
