@@ -1,7 +1,24 @@
+import time
 from random import randint
 
 # N = 8
 
+def ProblemaRegineAlp(table_sizes):
+    solving_times = []
+    for i in range(len(table_sizes)):
+        n = table_sizes[i]
+        state = [0] * n
+        board = [[0 for i in range(n)] for j in range(n)]
+        configureRandomly(board, state, n)
+        timp = time.time()
+        time.sleep(1)
+        hillClimbing(board, state, n)
+        print(time.time() - timp - 1)
+        solving_times.append(time.time() - timp - 1)
+        matrice = [["." for _ in range(n)] for i in range(n)]
+
+
+    return solving_times
 
 def configureRandomly(board, state, N):
     for i in range(N):
@@ -153,7 +170,7 @@ def hillClimbing(board, state, N):
 
         if (compareStates(state, neighbourState, N)):
 
-            printBoard(board, N)
+            #printBoard(board, N)
             break
 
         elif (calculateObjective(board, state, N) == calculateObjective(neighbourBoard, neighbourState, N)):

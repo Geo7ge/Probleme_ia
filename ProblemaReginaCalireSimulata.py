@@ -6,6 +6,16 @@ from copy import deepcopy
 # N_QUEENS = 500
 TEMPERATURE = 4000
 
+def ProblemaRegineCS(table_sizes):
+    solving_times = []
+    for i in range(len(table_sizes)):
+        n = table_sizes[i]
+        timp = time.time()
+        time.sleep(1)
+        simulated_annealing(n)
+        print(time.time() - timp - 1)
+        solving_times.append(time.time() - timp - 1)
+    return solving_times
 
 def threat_calculate(n):
     '''Combination formular. It is choosing two queens in n queens'''

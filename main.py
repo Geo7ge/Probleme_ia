@@ -1,10 +1,10 @@
 import time
 
-from ProblemaRegineBKT import solve_queens
-from ProblemaRegineAlpinist import configureRandomly, hillClimbing
+from ProblemaRegineBKT import solve_queens, ProblemaRegineBkt
+from ProblemaRegineAlpinist import configureRandomly, hillClimbing, ProblemaRegineAlp
 from TravelingSalesman import travellingSalesmanProblem
 from TravelingSalesmanAlpinist import readCoordinates, calcDistances, generateInitialTour, hillClimb
-from ProblemaReginaCalireSimulata import simulated_annealing
+from ProblemaReginaCalireSimulata import simulated_annealing, ProblemaRegineCS
 from ProblemaRegineAlgoritmGenetic import regine_algoritm_generic
 from plot import plot_chart
 
@@ -25,91 +25,20 @@ if __name__ == "__main__":
     while(True):
         optiune = int(input("Introduceti optiunea aleasa: "))
         if optiune == 1:
-            solving_times = []
-            for i in range(len(table_sizes)):
-                n = table_sizes[i]
-                timp = time.time()
-                time.sleep(1)
-                solution = solve_queens(n)
-                print(time.time() - timp - 1)
-                solving_times.append(time.time() - timp - 1)
-                # if solution:
-                #     print(f"Soluție pentru problema reginelor cu {n} regine:")
-                #     # print(solution)
-                #     matrice = [["." for _ in range(n)] for i in range(n)]
-                #     for i in solution:
-                #         matrice[i][solution[i]] = "Q"
-                #     for linie in matrice:
-                #         print(linie)
-                # else:
-                #     print(f"Nu există soluție pentru problema reginelor cu {n} regine.")
-            solving_times_alt = []
-            for i in range(len(table_sizes)):
-                n = table_sizes[i]
-                timp = time.time()
-                time.sleep(1)
-                solution = solve_queens(n)
-                print(time.time() - timp - 1)
-                solving_times_alt.append(time.time() - timp - 1)
-                # if solution:
-                #     print(f"Soluție pentru problema reginelor cu {n} regine:")
-                #     # print(solution)
-                #     matrice = [["." for _ in range(n)] for i in range(n)]
-                #     for i in solution:
-                #         matrice[i][solution[i]] = "Q"
-                #     for linie in matrice:
-                #         print(linie)
-                # else:
-                #     print(f"Nu există soluție pentru problema reginelor cu {n} regine.")
+            solving_times_alt = solving_times
+            solving_times = ProblemaRegineBkt(table_sizes)
 
         elif optiune == 2:
-            solving_times = []
-            for i in range(len(table_sizes)):
-                n = table_sizes[i]
-                state = [0] * n
-                board = [[0 for i in range(n)] for j in range(n)]
-                configureRandomly(board, state, n)
-                timp = time.time()
-                time.sleep(1)
-                hillClimbing(board, state, n)
-                print(time.time() - timp - 1)
-                solving_times.append(time.time() - timp - 1)
-                matrice = [["." for _ in range(n)] for i in range(n)]
-            solving_times_alt = []
-            for i in range(len(table_sizes)):
-                n = table_sizes[i]
-                state = [0] * n
-                board = [[0 for i in range(n)] for j in range(n)]
-                configureRandomly(board, state, n)
-                timp = time.time()
-                time.sleep(1)
-                hillClimbing(board, state, n)
-                print(time.time() - timp - 1)
-                solving_times_alt.append(time.time() - timp - 1)
-                matrice = [["." for _ in range(n)] for i in range(n)]
+            solving_times_alt = solving_times
+            solving_times = ProblemaRegineAlp(table_sizes)
 
         elif optiune == 5:
-            solving_times = []
-            for i in range(len(table_sizes)):
-                n = table_sizes[i]
-                timp = time.time()
-                time.sleep(1)
-                simulated_annealing(n)
-                print(time.time() - timp - 1)
-                solving_times.append(time.time() - timp - 1)
-            solving_times_alt = []
-            for i in range(len(table_sizes)):
-                n = table_sizes[i]
-                timp = time.time()
-                time.sleep(1)
-                simulated_annealing(n)
-                print(time.time() - timp - 1)
-                solving_times_alt.append(time.time() - timp - 1)
+            solving_times_alt = solving_times
+            solving_times = ProblemaRegineCS(table_sizes)
 
         elif optiune == 6:
+            solving_times_alt = solving_times
             solving_times = regine_algoritm_generic(table_sizes)
-            solving_times_alt = regine_algoritm_generic(table_sizes)
-
 
         elif optiune == 3:
             graph = [[0, 10, 15, 20], [10, 0, 35, 20], [15, 35, 0, 30], [50, 65, 30, 0]]

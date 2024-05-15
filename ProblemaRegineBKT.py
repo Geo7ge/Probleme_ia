@@ -12,6 +12,17 @@ import chess
 #             coordinates.append((x, y))
 #     return coordinates
 
+def ProblemaRegineBkt(table_sizes):
+    solving_times = []
+    for i in range(len(table_sizes)):
+        n = table_sizes[i]
+        timp = time.time()
+        time.sleep(1)
+        solution = solve_queens(n)
+        print(time.time() - timp - 1)
+        solving_times.append(time.time() - timp - 1)
+    return solving_times
+
 def solve_queens(n):
     def is_valid(queens, col):
         for row in range(len(queens)):
