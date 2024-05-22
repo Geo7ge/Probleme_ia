@@ -6,7 +6,6 @@ FIRST_GEN = 500
 def regine_algoritm_generic(table_sizes):
     times = []
     for x in range(len(table_sizes)):
-        # dimension = int(input("Enter board dimension: "))
         dimension = table_sizes[x]
         chess = GAChess(dimension)
         start = time()
@@ -16,9 +15,9 @@ def regine_algoritm_generic(table_sizes):
         # print(solution)
         # print(end - start)
         sleep(1)
-        times.append(end - start)
+        times.append(end - start - 1)
+        print("Solving time for table size " + str(table_sizes[x]) + " :" + str(time() - start - 1))
     return times
-
 
 
 class GAChess:
@@ -148,10 +147,11 @@ class GAChess:
             count += 1
             if self.goalIndex >= 0:
                 try:
-                    print(count)
+                    # print(count)
                     return self.goal
                 except IndexError:
                     print(self.goalIndex)
+                    pass
             else:
                 continue
 

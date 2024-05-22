@@ -19,7 +19,7 @@ def ProblemaRegineBkt(table_sizes):
         timp = time.time()
         time.sleep(1)
         solution = solve_queens(n)
-        print(time.time() - timp - 1)
+        print("Solving time for table size "+ str(n) + " :" + str(time.time() - timp - 1))
         solving_times.append(time.time() - timp - 1)
     return solving_times
 

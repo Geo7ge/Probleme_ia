@@ -13,11 +13,9 @@ def ProblemaRegineAlp(table_sizes):
         timp = time.time()
         time.sleep(1)
         hillClimbing(board, state, n)
-        print(time.time() - timp - 1)
+        print("Solving time for table size "+ str(n) + " :" + str(time.time() - timp - 1))
         solving_times.append(time.time() - timp - 1)
         matrice = [["." for _ in range(n)] for i in range(n)]
-
-
     return solving_times
 
 def configureRandomly(board, state, N):

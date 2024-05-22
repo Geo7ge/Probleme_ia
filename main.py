@@ -9,9 +9,8 @@ from ProblemaRegineAlgoritmGenetic import regine_algoritm_generic
 from plot import plot_chart
 
 
-
 if __name__ == "__main__":
-    table_sizes =[8, 12, 16, 20, 22]
+    table_sizes = [8, 12, 16, 20, 22]
     solving_times = []
     solving_times_alt = []
     print("1 - problema regine bkt")
@@ -56,6 +55,7 @@ if __name__ == "__main__":
             print(finalTour)
 
         elif optiune == 10:
+            print(solving_times, solving_times_alt)
             plot_chart(table_sizes, solving_times, solving_times_alt)
             pass
         elif optiune == 0:
