@@ -11,6 +11,17 @@ from math import *
 
 # this function reads the co-ordinates of the various cities in the Travelling Salesman Problem
 # and saves them in a 2D list cityCoordinates
+
+def travelingSalesmanAplinist():
+    cityCoordinates = readCoordinates("intput2.txt")
+    distances = calcDistances(cityCoordinates)
+    numberOfCities = len(cityCoordinates)
+    initialTour = generateInitialTour(numberOfCities)
+    numberOfRepetitions = input("Enter number of repetitions")
+    finalTour, finalValue, repetitions = hillClimb(numberOfCities, numberOfRepetitions, distances)
+    print("The best tour is: ")
+    print(finalTour)
+
 def readCoordinates(inputFile):
     cityCoordinates = []
 

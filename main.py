@@ -1,9 +1,11 @@
 import time
 
+from Graphics import showGraph
 from ProblemaRegineBKT import solve_queens, ProblemaRegineBkt
 from ProblemaRegineAlpinist import configureRandomly, hillClimbing, ProblemaRegineAlp
-from TravelingSalesman import travellingSalesmanProblem
-from TravelingSalesmanAlpinist import readCoordinates, calcDistances, generateInitialTour, hillClimb
+from TravelingSalesman import travellingSalesmanProblem, travellingSalesman
+from TravelingSalesmanAlpinist import readCoordinates, calcDistances, generateInitialTour, hillClimb, \
+    travelingSalesmanAplinist
 from ProblemaReginaCalireSimulata import simulated_annealing, ProblemaRegineCS
 from ProblemaRegineAlgoritmGenetic import regine_algoritm_generic
 from plot import plot_chart
@@ -15,11 +17,12 @@ if __name__ == "__main__":
     solving_times_alt = []
     print("1 - problema regine bkt")
     print("2 - problema regine alpinist")
-    print("5 - problema regine calire simulata")
-    print("6 - problema regine algoritm generic")
-    print("3 - problema comis voiajorului")
-    print("4 - problema comis voiajorului alpinist")
+    print("3 - problema regine calire simulata")
+    print("4 - problema regine algoritm generic")
+    print("5 - problema comis voiajorului")
+    print("6 - problema comis voiajorului alpinist")
     print("10 - grafic problema N regine")
+    print("11 - grafic pentru problema reginelor folosind date deja existente")
     print("0- EXIT")
     while(True):
         optiune = int(input("Introduceti optiunea aleasa: "))
@@ -31,32 +34,25 @@ if __name__ == "__main__":
             solving_times_alt = solving_times
             solving_times = ProblemaRegineAlp(table_sizes)
 
-        elif optiune == 5:
+        elif optiune == 3:
             solving_times_alt = solving_times
             solving_times = ProblemaRegineCS(table_sizes)
 
-        elif optiune == 6:
+        elif optiune == 4:
             solving_times_alt = solving_times
             solving_times = regine_algoritm_generic(table_sizes)
 
-        elif optiune == 3:
-            graph = [[0, 10, 15, 20], [10, 0, 35, 20], [15, 35, 0, 30], [50, 65, 30, 0]]
-            s = 0
-            print(travellingSalesmanProblem(graph, s))
+        elif optiune == 5:
+            travellingSalesman()
 
-        elif optiune == 4:
-            cityCoordinates = readCoordinates("intput2.txt")
-            distances = calcDistances(cityCoordinates)
-            numberOfCities = len(cityCoordinates)
-            initialTour = generateInitialTour(numberOfCities)
-            numberOfRepetitions = input("Enter number of repetitions")
-            finalTour, finalValue, repetitions = hillClimb(numberOfCities, numberOfRepetitions, distances)
-            print("The best tour is: ")
-            print(finalTour)
+        elif optiune == 6:
+            travelingSalesmanAplinist()
 
         elif optiune == 10:
-            print(solving_times, solving_times_alt)
             plot_chart(table_sizes, solving_times, solving_times_alt)
+
+        elif optiune == 11:
+            showGraph()
             pass
         elif optiune == 0:
             break

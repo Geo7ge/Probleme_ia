@@ -5,6 +5,11 @@ from itertools import permutations
 
 V = 4
 # implementation of traveling Salesman Problem
+def travellingSalesman():
+    graph = [[0, 10, 15, 20], [10, 0, 35, 20], [15, 35, 0, 30], [50, 65, 30, 0]]
+    s = 0
+    print(travellingSalesmanProblem(graph, s))
+
 def travellingSalesmanProblem(graph, s):
     # store all vertex apart from source vertex
     vertex = []
