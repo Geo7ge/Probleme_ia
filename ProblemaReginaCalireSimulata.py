@@ -105,7 +105,7 @@ def simulated_annealing(n):
 def print_chess_board(board):
     '''Print the chess board'''
     for column, row in board.items():
-        # print("{} => {}".format(column, row))
+        print("{} => {}".format(column, row))
         pass
 
 

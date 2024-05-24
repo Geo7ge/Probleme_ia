@@ -20,6 +20,16 @@ def ProblemaRegineBkt(table_sizes):
         time.sleep(1)
         solution = solve_queens(n)
         print("Solving time for table size "+ str(n) + " :" + str(time.time() - timp - 1))
+
+        if solution:
+            print(f"Soluție pentru problema reginelor cu {n} regine:")
+            # print(solution)
+            matrice = [["." for _ in range(n)] for i in range(n)]
+            for i in solution:
+                matrice[i][solution[i]] = "Q"
+            for linie in matrice:
+                print(linie)
+
         solving_times.append(time.time() - timp - 1)
     return solving_times
 
@@ -48,6 +58,7 @@ def solve_queens(n):
         return None
 
     return backtrack([], 0)
+
 
 if __name__ == "__main__":
     n = 8

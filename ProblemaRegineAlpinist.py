@@ -168,7 +168,7 @@ def hillClimbing(board, state, N):
 
         if (compareStates(state, neighbourState, N)):
 
-            #printBoard(board, N)
+            printBoard(board, N)
             break
 
         elif (calculateObjective(board, state, N) == calculateObjective(neighbourBoard, neighbourState, N)):
