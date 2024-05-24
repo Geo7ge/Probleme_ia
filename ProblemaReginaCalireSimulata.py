@@ -75,7 +75,6 @@ def simulated_annealing(n):
     solution_found = False
     answer = create_board(n)
 
-    # To avoid recounting when can not find a better state
     cost_answer = cost(answer)
 
     t = TEMPERATURE

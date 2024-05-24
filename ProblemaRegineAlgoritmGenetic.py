@@ -132,13 +132,7 @@ class GAChess:
         return newEnv
 
     def solveGA(self):
-        # init
         self.initializeFirstGeneration(FIRST_GEN)
-        # what if randomly we already generated solution in the environment?
-        # for gen in self.env:
-        # if self.isSolution(gen):
-        # return gen
-        # start algo!
         count = 0
         while True:
             self.reproduce()
